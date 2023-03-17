@@ -34,5 +34,7 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
             Assert.Throws<ArgumentException>(() => commandFactory.GetCommand("InValIdComMaNd"));
         }
     }
+
+
 }
 

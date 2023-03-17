@@ -4,7 +4,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 {
     public class DirectionCommand : ICommand
     {
-        public DirectionCommand(string direction)
+        public DirectionCommand(DirectionCommandDirections direction)
         {
         }
 

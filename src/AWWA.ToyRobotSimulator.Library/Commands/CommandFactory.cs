@@ -20,9 +20,9 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 				case "MOVE":
 					return new MoveCommand();
 				case "LEFT":
-					return new DirectionCommand(command);
+					return new DirectionCommand(DirectionCommandDirections.Left);
 				case "RIGHT":
-					return new DirectionCommand(command);
+					return new DirectionCommand(DirectionCommandDirections.Right);
 				case "REPORT":
 					return new ReportCommand();
 				default:
