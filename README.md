@@ -11,9 +11,9 @@ Code Coverage : ![Code Coverage](https://img.shields.io/badge/Code%20Coverage-89
 Clone this git repository then run
 
 ```bash
-dotnet run --project src/AWWA.ToyRobotSimulator.Console/AWWA.ToyRobotSimulator.Console.cspro
+dotnet run --project src/AWWA.ToyRobotSimulator.Console/AWWA.ToyRobotSimulator.Console.csproj
 ```
-Or open the sln file and compile and run the console application in Visual Studio.
+Or open the sln file and compile and run the console application in Visual Studio.  .Net 6 SDK will be needed.
 
 ## Console Application Usage
 
