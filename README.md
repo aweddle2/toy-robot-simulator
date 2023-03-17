@@ -2,6 +2,8 @@
 
 Toy Robot Simulator is a C# library for moving Items around a Board.
 
+Build Status : ![Build Status](https://github.com/aweddle2/toy-robot-simulator/actions/workflows/dotnet-desktop.yml/badge.svg)
+Code Coverage : ![Code Coverage](https://img.shields.io/badge/Code%20Coverage-89%25-success?style=flat)
 ## Installation
 
 Clone this git repository then run
