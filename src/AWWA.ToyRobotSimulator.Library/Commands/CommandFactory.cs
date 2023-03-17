@@ -1,4 +1,6 @@
 ﻿using System;
+using AWWA.ToyRobotSimulator.Library.Directions;
+
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
 	public class CommandFactory
@@ -20,9 +22,9 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 				case "MOVE":
 					return new MoveCommand();
 				case "LEFT":
-					return new DirectionCommand(DirectionCommandDirections.Left);
+					return new DirectionCommand(RelativeDirection.Left);
 				case "RIGHT":
-					return new DirectionCommand(DirectionCommandDirections.Right);
+					return new DirectionCommand(RelativeDirection.Right);
 				case "REPORT":
 					return new ReportCommand();
 				default:

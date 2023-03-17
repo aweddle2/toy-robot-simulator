@@ -2,14 +2,14 @@
 
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
-    public class MoveCommand : ICommand
+    public class MoveCommand : IValidateCommand
     {
-        public CommandResult Execute(IBoard board)
+        public CommandResult Execute(Board board)
         {
             throw new NotImplementedException();
         }
 
-        public CommandResult Validate(IBoard board)
+        public CommandResult Validate(Board board)
         {
             throw new NotImplementedException();
         }

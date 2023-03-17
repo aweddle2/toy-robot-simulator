@@ -9,9 +9,11 @@
   <ItemGroup>
     <None Remove="Commands\" />
     <None Remove="Board\" />
+    <None Remove="Directions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Boards\" />
+    <Folder Include="Directions\" />
   </ItemGroup>
 </Project>

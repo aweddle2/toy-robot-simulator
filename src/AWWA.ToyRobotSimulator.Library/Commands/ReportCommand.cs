@@ -4,12 +4,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 {
     public class ReportCommand : ICommand
     {
-        public CommandResult Execute(IBoard board)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CommandResult Validate(IBoard board)
+        public CommandResult Execute(Board board)
         {
             throw new NotImplementedException();
         }
