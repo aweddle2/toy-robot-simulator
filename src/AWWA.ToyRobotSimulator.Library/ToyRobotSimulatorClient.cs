@@ -23,7 +23,20 @@ namespace AWWA.ToyRobotSimulator.Library
 
 		public CommandResult ExecuteCommand(string argument)
 		{
-			ICommand command = _factory.GetCommand(argument);
+			ICommand command;
+
+            try
+			{
+				command = _factory.GetCommand(argument);
+			}
+			catch (ArgumentException ae)
+			{
+				CommandResult errorResult = new CommandResult();
+				errorResult.Success = false;
+				errorResult.Messages.Add(ae.Message);
+				return errorResult;
+			}
+
 
 			CommandResult validationResult = command.Validate(_board);
 
