@@ -7,70 +7,28 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 {
 	public class PlaceCommand : ICommand
 	{
+        private string _command;
         private int _xPosition;
         private int _yPosition;
         private ICellContents _cellContents;
 
 		public PlaceCommand(string command)
         {
+            _command = command;
             //Maybe in the future this command will support more Cell Content Types, but for now it's all robots
             _cellContents = new Robot();
 
-            ValidateCommand(command);
-		}
-
-        private void ValidateCommand(string command)
-        {
-            //First split the command by space to get the parts we are interested in
-            string[] commandParts = command.Split(' ');
-            if (!commandParts.Length.Equals(2))
-            {
-                throw new ArgumentException($"Command '{command}' is not a valid PLACE command.  Usage 'PLACE X,Y,DIRECTION'.", nameof(command));
-            }
-
-            //and then by comma to get the 3 remaining parts
-            commandParts = commandParts[1].Split(',');
-            if (commandParts.Length < 2)
-            {
-                throw new ArgumentException($"Command '{command}' is not a valid PLACE command.  Usage 'PLACE X,Y,DIRECTION'.", nameof(command));
-            }
-
-            int x;
-            if (int.TryParse(commandParts[0], out x))
-            {
-                _xPosition = x;
-            }
-            else
-            {
-                throw new ArgumentException($"Command '{command}' is not a valid PLACE command.  X Coordinate not a number.", nameof(command));
-            }
-
-            int y;
-            if (int.TryParse(commandParts[1], out y))
-            {
-                _yPosition = y;
-            }
-            else
-            {
-                throw new ArgumentException($"Command '{command}' is not a valid PLACE command.  Y Coordinate not a number.", nameof(command));
-            }
-
-
-            //This does not need to throw, because
-            //"Once the robot is on the table, subsequent PLACE commands could leave out the direction and only provide the coordinates"
-            AbsoluteDirection dir;
-            if (commandParts.Length == 3 && Enum.TryParse(commandParts[2], true, out dir))
-            {
-
-                _cellContents.Direction = dir;
-            }
         }
-
 
         public CommandResult Execute(Board board)
         {
-            CommandResult result = new CommandResult();
-            result.Success = true;
+            CommandResult result = ParseCommand();
+
+            //Early return because the command didn't even parse properly so no point continuing.
+            if (!result.Success)
+            {
+                return result;
+            }
 
             //Get any existing Robot from the board.  
             IList<Cell> cellsWithContents = board.GetCellsWithContents();
@@ -117,9 +75,13 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 
         public CommandResult Validate(Board board)
         {
+            CommandResult result = ParseCommand();
 
-            CommandResult result = new CommandResult();
-            result.Success = true;
+            //Early return because the command didn't even parse properly so no point continuing.
+            if (!result.Success)
+            {
+                return result;
+            }
 
             //The robot is free to roam around the surface of the table, but must be prevented from falling to destruction
             //Any movement that would result in this must be prevented, however further valid movement commands must still be allowed.
@@ -140,6 +102,65 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
                     result.Success = false;
                     result.Messages.Add("Command Invalid.  Must specify the direction for the first PLACE command.");
                 }
+            }
+
+            return result;
+        }
+
+
+        private CommandResult ParseCommand()
+        {
+            CommandResult result = new CommandResult();
+            result.Success = true;
+
+            //First split the command by space to get the parts we are interested in
+            string[] commandParts = _command.Split(' ');
+            if (!commandParts.Length.Equals(2))
+            {
+                result.Success = false;
+                result.Messages.Add($"Command '{_command}' is not a valid PLACE command.  Usage 'PLACE X,Y,DIRECTION'.");
+                return result;
+            }
+
+            //and then by comma to get the 3 remaining parts
+            commandParts = commandParts[1].Split(',');
+            if (commandParts.Length < 2)
+            {
+                result.Success = false;
+                result.Messages.Add($"Command '{_command}' is not a valid PLACE command.  Usage 'PLACE X,Y,DIRECTION'.");
+                return result;
+            }
+
+            int x;
+            if (int.TryParse(commandParts[0], out x))
+            {
+                _xPosition = x;
+            }
+            else
+            {
+                result.Success = false;
+                result.Messages.Add($"Command '{_command}' is not a valid PLACE command.  X Coordinate not a number.");
+                return result;
+            }
+
+            int y;
+            if (int.TryParse(commandParts[1], out y))
+            {
+                _yPosition = y;
+            }
+            else
+            {
+                result.Success = false;
+                result.Messages.Add($"Command '{_command}' is not a valid PLACE command.  Y Coordinate not a number.");
+                return result;
+            }
+
+            //This does not need to throw, because
+            //"Once the robot is on the table, subsequent PLACE commands could leave out the direction and only provide the coordinates"
+            AbsoluteDirection dir;
+            if (commandParts.Length == 3 && Enum.TryParse(commandParts[2], true, out dir))
+            {
+                _cellContents.Direction = dir;
             }
 
             return result;

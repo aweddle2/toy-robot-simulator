@@ -23,16 +23,16 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 
             switch (cellContents.Direction) {
                 case AbsoluteDirection.North:
-                    newXPosition++;
-                    break;
-                case AbsoluteDirection.South:
-                    newXPosition--;
-                    break;
-                case AbsoluteDirection.East:
                     newYPosition++;
                     break;
-                case AbsoluteDirection.West:
+                case AbsoluteDirection.South:
                     newYPosition--;
+                    break;
+                case AbsoluteDirection.East:
+                    newXPosition++;
+                    break;
+                case AbsoluteDirection.West:
+                    newXPosition--;
                     break;
 
             }

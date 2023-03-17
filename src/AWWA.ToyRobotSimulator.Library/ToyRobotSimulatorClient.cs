@@ -7,16 +7,32 @@ namespace AWWA.ToyRobotSimulator.Library
 {
 	public class ToyRobotSimulatorClient
 	{
-		public Board Board;
-		public Robot Robot;
+		private Board _board;
+		private Robot _robot;
+		private CommandFactory _factory;
 
         /// <summary>
         /// This constructor will create a new board with a 6 x 6 grid
         /// </summary>
         public ToyRobotSimulatorClient()
 		{
-			Board = new Board(6, 6);
-			Robot = new Robot();
+			_board = new Board(6, 6);
+			_robot = new Robot();
+            _factory = new CommandFactory();
+		}
+
+		public CommandResult ExecuteCommand(string argument)
+		{
+			ICommand command = _factory.GetCommand(argument);
+
+			CommandResult validationResult = command.Validate(_board);
+
+            if (!validationResult.Success)
+			{
+				return validationResult;
+			}
+
+			return command.Execute(_board);
 		}
 	}
 }

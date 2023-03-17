@@ -52,10 +52,10 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
         }
 
         [Theory]
-        [InlineData(3, 3, AbsoluteDirection.North, 4, 3)]
-        [InlineData(3, 3, AbsoluteDirection.South, 2, 3)]
-        [InlineData(3, 3, AbsoluteDirection.East, 3, 4)]
-        [InlineData(3, 3, AbsoluteDirection.West, 3, 2)]
+        [InlineData(3, 3, AbsoluteDirection.North, 3, 4)]
+        [InlineData(3, 3, AbsoluteDirection.South, 3, 2)]
+        [InlineData(3, 3, AbsoluteDirection.East, 4, 3)]
+        [InlineData(3, 3, AbsoluteDirection.West, 2, 3)]
         public void Given_A_Robot_Is_On_The_Board_When_A_MoveCommand_Is_Issued_Then_The_Command_Should_Execute(int x, int y, AbsoluteDirection absoluteDirection, int expectedX, int expectedY)
         {
             //Arrange
