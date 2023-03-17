@@ -11,11 +11,20 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
     {
         private RelativeDirection _relativeDirection;
 
+        /// <summary>
+        /// Create a command to rotate the contents of the cell to the left of right
+        /// </summary>
+        /// <param name="direction"></param>
         public DirectionCommand(RelativeDirection direction)
         {
             _relativeDirection = direction;
         }
 
+        /// <summary>
+        /// Validate the Command against the board
+        /// </summary>
+        /// <param name="board">The board to validate</param>
+        /// <returns></returns>
         public CommandResult Validate(Board board)
         {
             CommandResult result = new CommandResult();
@@ -32,7 +41,11 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             return result;
         }
 
-
+        /// <summary>
+        /// Execute the Direction change on the supplied board.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public CommandResult Execute(Board board)
         {
             //Get the robots from the board

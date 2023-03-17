@@ -31,6 +31,8 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
             if (existingRobot)
             {
                 Mock<ICellContents> mockCellContents = new Mock<ICellContents>();
+                mockCellContents.SetupAllProperties();
+                mockCellContents.Object.Direction = AbsoluteDirection.North;
                 board.SetCellContents(3, 3, mockCellContents.Object);
             }
 
@@ -48,6 +50,8 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
         [InlineData("PLACE 1,1", true, true)]
         [InlineData("PLACE 1,1,NORTH", false, true)]
         [InlineData("PLACE 1,1,NORTH", true, true)]
+        [InlineData("PLACE 8,8,NORTH", true, false)]
+        [InlineData("PLACE 8,8,NORTH", false, false)]
         public void PlaceCommand_Execute_Tests(string command, bool existingRobot, bool expectedResult)
         {
             //Arrange
@@ -58,7 +62,6 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
                 Mock<ICellContents> mockCellContents = new Mock<ICellContents>();
                 mockCellContents.SetupAllProperties();
                 mockCellContents.Object.Direction = AbsoluteDirection.North;
-
                 board.SetCellContents(3, 3, mockCellContents.Object);
             }
 

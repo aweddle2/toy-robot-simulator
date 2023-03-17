@@ -2,6 +2,10 @@
 using AWWA.ToyRobotSimulator.Library.CellContents;
 namespace AWWA.ToyRobotSimulator.Library.Boards
 {
+	/// <summary>
+	/// This is the board that items can be added to.
+	/// This class also holds methods for clearing and settings items in a cell.
+	/// </summary>
 	public class Board
 	{
         private IList<Cell> _cells;

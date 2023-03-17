@@ -2,8 +2,16 @@
 
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
+    /// <summary>
+    /// This command gets the board to report on the item it contains.
+    /// </summary>
     public class ReportCommand : ICommand
     {
+        /// <summary>
+        /// Run the report on the item on the board
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public CommandResult Execute(Board board)
         {
             CommandResult result = new CommandResult();
@@ -23,6 +31,11 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             return result;
         }
 
+        /// <summary>
+        /// Validate whether the board actually has any items on it to report on.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public CommandResult Validate(Board board)
         {
             CommandResult result = new CommandResult();

@@ -8,7 +8,6 @@ namespace AWWA.ToyRobotSimulator.Library
 	public class ToyRobotSimulatorClient
 	{
 		private Board _board;
-		private Robot _robot;
 		private CommandFactory _factory;
 
         /// <summary>
@@ -17,12 +16,17 @@ namespace AWWA.ToyRobotSimulator.Library
         public ToyRobotSimulatorClient()
 		{
 			_board = new Board(6, 6);
-			_robot = new Robot();
             _factory = new CommandFactory();
 		}
 
+		/// <summary>
+		/// Executes a command provided
+		/// </summary>
+		/// <param name="argument">a command to run</param>
+		/// <returns>The result and any feedback messages for the user who created the command.</returns>
 		public CommandResult ExecuteCommand(string argument)
 		{
+			//Get the command from the factory
 			ICommand command;
 
             try
@@ -37,7 +41,7 @@ namespace AWWA.ToyRobotSimulator.Library
 				return errorResult;
 			}
 
-
+			//Validate the command
 			CommandResult validationResult = command.Validate(_board);
 
             if (!validationResult.Success)
@@ -45,6 +49,7 @@ namespace AWWA.ToyRobotSimulator.Library
 				return validationResult;
 			}
 
+			//Execute the command
 			return command.Execute(_board);
 		}
 	}

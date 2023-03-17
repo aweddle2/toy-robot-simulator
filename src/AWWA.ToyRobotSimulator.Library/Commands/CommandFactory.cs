@@ -9,8 +9,8 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 		/// Gets an ICommand from an argument passed in from somewhere (command line, fil etc)
 		/// Parses the string to the first space to get the command and identifies a matching command to return
 		/// </summary>
-		/// <param name="argument"></param>
-		/// <returns><c ref="ICommand"></c></returns>
+		/// <param name="argument">The command that has to be run</param>
+		/// <returns><see cref="ICommand" /></returns>
 		public ICommand GetCommand(string argument)
 		{
 			string command = argument.Split(' ')[0].ToUpper();
@@ -29,10 +29,6 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 					return new ReportCommand();
 				default:
 					throw new ArgumentException("Command not valid", nameof(argument));
-
-
-
-
 			}
 		}
 	}

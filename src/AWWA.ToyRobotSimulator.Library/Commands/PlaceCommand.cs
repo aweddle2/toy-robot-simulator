@@ -5,6 +5,10 @@ using AWWA.ToyRobotSimulator.Library.Directions;
 
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
+    /// <summary>
+    /// Places an item in the contents of a cell
+    /// If an item already exists on the board it will me moved.  Maximum 1 item per board.
+    /// </summary>
 	public class PlaceCommand : ICommand
 	{
         private string _command;
@@ -20,6 +24,11 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 
         }
 
+        /// <summary>
+        /// Place the item on the board and move if the board already has an item
+        /// </summary>
+        /// <param name="board">The board to Place an Item on</param>
+        /// <returns></returns>
         public CommandResult Execute(Board board)
         {
             CommandResult result = ParseCommand();
@@ -73,6 +82,11 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             return result; 
         }
 
+        /// <summary>
+        /// Validate that this command can actually place an item on this board.
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public CommandResult Validate(Board board)
         {
             CommandResult result = ParseCommand();
@@ -131,6 +145,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
                 return result;
             }
 
+            //Get the X coordinate from the command
             int x;
             if (int.TryParse(commandParts[0], out x))
             {
@@ -143,6 +158,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
                 return result;
             }
 
+            //Get the Y coordinate from the command
             int y;
             if (int.TryParse(commandParts[1], out y))
             {
@@ -155,7 +171,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
                 return result;
             }
 
-            //This does not need to throw, because
+            //This does not need to retuen an error, because
             //"Once the robot is on the table, subsequent PLACE commands could leave out the direction and only provide the coordinates"
             AbsoluteDirection dir;
             if (commandParts.Length == 3 && Enum.TryParse(commandParts[2], true, out dir))

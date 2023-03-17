@@ -4,8 +4,16 @@ using AWWA.ToyRobotSimulator.Library.Directions;
 
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
+    /// <summary>
+    /// This command moves an item one cell in the direction it is facing.
+    /// </summary>
     public class MoveCommand : ICommand
     {
+        /// <summary>
+        /// Move the contents of the cell one cell in the direction it is facing.
+        /// </summary>
+        /// <param name="board">The board that needs to move</param>
+        /// <returns></returns>
         public CommandResult Execute(Board board)
         {
             //Get the robots from the board and the contents of the cell
@@ -34,9 +42,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
                 case AbsoluteDirection.West:
                     newXPosition--;
                     break;
-
             }
-
 
             board.SetCellContents(newXPosition, newYPosition, cellContents);
 
@@ -46,6 +52,11 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             return result;
         }
 
+        /// <summary>
+        /// Validate whether this board can make this change
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public CommandResult Validate(Board board)
         {
             CommandResult result = new CommandResult();
@@ -66,9 +77,15 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             }
 
             return result;
-
         }
 
+        /// <summary>
+        /// Determines whether the contents of the cell can move in the direction it wants to move into given the size of the board
+        /// </summary>
+        /// <param name="board">The board that has the cell that wants to move contents</param>
+        /// <param name="cell">The cell containing the item that wants to move</param>
+        /// <returns>A boolean on whether the item can move in the cell.</returns>
+        /// <exception cref="ArgumentException"></exception>
         private bool CanMove(Board board, Cell cell)
         {
             switch (cell.Contents.Direction)
@@ -84,8 +101,6 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             }
 
             throw new ArgumentException("Cell does not have contents or the direction of the contents is not set.", nameof(cell));
-
         }
-
     }
 }

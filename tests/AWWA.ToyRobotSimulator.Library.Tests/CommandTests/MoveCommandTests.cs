@@ -33,7 +33,7 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
         [InlineData(3,0,AbsoluteDirection.South,false)]
         [InlineData(5,3,AbsoluteDirection.East, false)]
         [InlineData(0,3,AbsoluteDirection.West, false)]
-        public void Given_A_Robot_Is_On_The_Board_When_A_MoveCommand_Is_Issued_Then_The_Command_Should_Validate_If_The_Robot_Can_Move(int x, int y, AbsoluteDirection absoluteDirection, bool expectedResult)
+        public void Given_A_Robot_Is_On_The_Board_When_A_MoveCommand_Is_Issued_Then_The_Command_Should_Validate(int x, int y, AbsoluteDirection absoluteDirection, bool expectedResult)
         {
             //Arrange
             Mock<ICellContents> mockCellContents = new Mock<ICellContents>();
