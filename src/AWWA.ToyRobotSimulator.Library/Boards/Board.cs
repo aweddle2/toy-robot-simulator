@@ -4,23 +4,24 @@ namespace AWWA.ToyRobotSimulator.Library.Boards
 {
 	public class Board
 	{
-		private int _width;
-		private int _height;
-		private IList<Cell> _cells;
+        private IList<Cell> _cells;
+
+		public int Width { get; private set; }
+		public int Height { get; private set; }
 
 		public Board(int width, int height)
 		{
-			_width = width;
-			_height = height;
+			Width = width;
+			Height = height;
 			_cells = new List<Cell>();
 			InitializeBoard();
 		}
 
 		private void InitializeBoard()
 		{
-			for (int i = 0; i < _width; i++)
+			for (int i = 0; i < Width; i++)
 			{
-				for (int j = 0; j < _height; j++)
+				for (int j = 0; j < Height; j++)
 				{
 					_cells.Add(new Cell(i, j));
 				}
@@ -71,7 +72,7 @@ namespace AWWA.ToyRobotSimulator.Library.Boards
         /// <param name="y">zero based index for the y axis</param>
         public bool IsCellValid(int x, int y)
 		{
-			return (x < _width & y < _height);
+			return (x < Width & y < Height);
         }
 	}
 }
