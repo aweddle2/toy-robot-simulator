@@ -1,7 +1,7 @@
 ﻿using System;
 using AWWA.ToyRobotSimulator.Library.Commands;
 using Xunit;
-namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
+namespace AWWA.ToyRobotSimulator.Library.Tests
 {
 	public class ToyRobotSimulatorClientTests
 	{
