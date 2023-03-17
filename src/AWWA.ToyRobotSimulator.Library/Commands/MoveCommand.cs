@@ -2,7 +2,7 @@
 
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
-    internal class MoveCommand : ICommand
+    public class MoveCommand : ICommand
     {
         public CommandResult Execute(IBoard board)
         {

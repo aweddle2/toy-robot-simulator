@@ -2,7 +2,7 @@
 
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
-    internal class ReportCommand : ICommand
+    public class ReportCommand : ICommand
     {
         public CommandResult Execute(IBoard board)
         {

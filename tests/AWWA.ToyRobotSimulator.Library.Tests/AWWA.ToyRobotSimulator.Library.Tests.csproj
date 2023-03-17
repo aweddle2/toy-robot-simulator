@@ -21,4 +21,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="CommandTests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CommandTests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AWWA.ToyRobotSimulator.Library\AWWA.ToyRobotSimulator.Library.csproj" />
+  </ItemGroup>
 </Project>

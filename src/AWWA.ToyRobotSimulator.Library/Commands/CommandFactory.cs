@@ -1,7 +1,7 @@
 ﻿using System;
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
-	internal class CommandFactory
+	public class CommandFactory
 	{
 		/// <summary>
 		/// Gets an ICommand from an argument passed in from somewhere (command line, fil etc)
@@ -9,9 +9,9 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
 		/// </summary>
 		/// <param name="argument"></param>
 		/// <returns><c ref="ICommand"></c></returns>
-		ICommand GetCommand(string argument)
+		public ICommand GetCommand(string argument)
 		{
-			string command = argument.Split(',')[0].ToUpper();
+			string command = argument.Split(' ')[0].ToUpper();
 
 			switch (command)
 			{
