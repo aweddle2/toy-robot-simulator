@@ -5,7 +5,7 @@ using AWWA.ToyRobotSimulator.Library.Directions;
 
 namespace AWWA.ToyRobotSimulator.Library.Commands
 {
-	public class PlaceCommand : IValidateCommand
+	public class PlaceCommand : ICommand
 	{
         private int _xPosition;
         private int _yPosition;
@@ -95,6 +95,13 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
                     result.Success = false;
                     result.Messages.Add("Could not move the robot from it's old cell.");
                 }
+            }
+            else if (_cellContents.Direction == null)
+            {
+                //Can't set the direction so fail
+                result.Success = false;
+                result.Messages.Add("Could not set the robots direction.");
+
             }
 
             //Move the Robot to the new Cell

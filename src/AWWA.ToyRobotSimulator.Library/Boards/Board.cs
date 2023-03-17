@@ -35,7 +35,7 @@ namespace AWWA.ToyRobotSimulator.Library.Boards
         public bool SetCellContents(int x, int y, ICellContents contents)
         {
             //If the coordinates are bigger than the board, just return
-            if (IsCellValid(x, y))
+            if (!IsCellValid(x, y))
             {
                 return false;
             }
@@ -51,7 +51,7 @@ namespace AWWA.ToyRobotSimulator.Library.Boards
         public bool ClearCellContents(int x, int y)
 		{
 			//If the coordinates are bigger than the board, just return
-			if (IsCellValid(x,y))
+			if (!IsCellValid(x,y))
 			{
 				return false;
 			}
@@ -71,7 +71,7 @@ namespace AWWA.ToyRobotSimulator.Library.Boards
         /// <param name="y">zero based index for the y axis</param>
         public bool IsCellValid(int x, int y)
 		{
-			return !(x > _width || y > _height);
+			return (x < _width & y < _height);
         }
 	}
 }

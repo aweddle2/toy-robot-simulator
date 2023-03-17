@@ -8,5 +8,10 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
         {
             throw new NotImplementedException();
         }
+
+        public CommandResult Validate(Board board)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
