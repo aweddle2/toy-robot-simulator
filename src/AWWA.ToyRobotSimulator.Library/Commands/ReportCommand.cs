@@ -17,11 +17,11 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             CommandResult result = new CommandResult();
 
             //Get the robots from the board
-            IList<Cell> cellsWithContents = board.GetCellsWithContents();
-            if (cellsWithContents.Count > 0)
+            Cell? cellWithContents = board.GetCellWithContents();
+            if (cellWithContents != null)
             {
                 result.Success = true;
-                result.Messages.Add($"Output: {cellsWithContents[0].XPosition},{cellsWithContents[0].YPosition},{cellsWithContents[0].Contents.Direction.ToString().ToUpper()}");
+                result.Messages.Add($"Output: {cellWithContents.XPosition},{cellWithContents.YPosition},{cellWithContents.Contents?.Direction?.ToString().ToUpper()}");
             }
             else
             {
@@ -42,8 +42,8 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             result.Success = true;
 
             //Get the robots from the board
-            IList<Cell> cellsWithContents = board.GetCellsWithContents();
-            if (cellsWithContents.Count == 0)
+            Cell? cellWithContents = board.GetCellWithContents();
+            if (cellWithContents == null)
             {
                 result.Success = false;
                 result.Messages.Add("Command Invalid.  Robot does not exist on the board.");

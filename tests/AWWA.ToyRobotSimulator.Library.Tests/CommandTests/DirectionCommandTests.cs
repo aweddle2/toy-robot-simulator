@@ -43,7 +43,7 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
 
             //Assert
             Assert.True(result.Success);
-            Assert.Equal(AbsoluteDirection.West, board.GetCellsWithContents()[0].Contents.Direction);
+            Assert.Equal(AbsoluteDirection.West, board?.GetCellWithContents()?.Contents?.Direction);
         }
 
     }

@@ -72,8 +72,9 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
 
             //Assert
             Assert.True(result.Success);
-            Assert.Equal(expectedX, board.GetCellsWithContents()[0].XPosition);
-            Assert.Equal(expectedY, board.GetCellsWithContents()[0].YPosition);
+            Cell? cellWithContents = board.GetCellWithContents();
+            Assert.Equal(expectedX, cellWithContents?.XPosition);
+            Assert.Equal(expectedY, cellWithContents?.YPosition);
         }
 
     }

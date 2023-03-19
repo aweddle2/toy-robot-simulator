@@ -17,19 +17,18 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
         public CommandResult Execute(Board board)
         {
             //Get the robots from the board and the contents of the cell
-            IList<Cell> cellsWithContents = board.GetCellsWithContents();
+            Cell? cellWithContents = board.GetCellWithContents();
 
-            Cell cell = cellsWithContents[0];
-            ICellContents cellContents = cell.Contents;
+            ICellContents cellContents = cellWithContents?.Contents;
 
             //Clear the contents of the cell
-            board.ClearCellContents(cell.XPosition, cell.YPosition);
+            board.ClearCellContents(cellWithContents.XPosition, cellWithContents.YPosition);
 
-            int newXPosition = cell.XPosition;
-            int newYPosition = cell.YPosition;
+            int newXPosition = cellWithContents.XPosition;
+            int newYPosition = cellWithContents.YPosition;
 
 
-            switch (cellContents.Direction) {
+            switch (cellContents?.Direction) {
                 case AbsoluteDirection.North:
                     newYPosition++;
                     break;
@@ -63,17 +62,17 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             result.Success = true;
 
             //Get the robots from the board.  Can't execute this command if there is not a robot
-            IList<Cell> cellsWithContents = board.GetCellsWithContents();
-            if (cellsWithContents.Count == 0)
+            Cell? cellWithContents = board.GetCellWithContents();
+            if (cellWithContents == null)
             {
                 result.Success = false;
                 result.Messages.Add("Command Invalid.  Robot does not exist on the board.");
                 return result;
             }
 
-            if (!CanMove(board, cellsWithContents[0])) {
+            if (!CanMove(board, cellWithContents)) {
                 result.Success = false;
-                result.Messages.Add($"Can't move {cellsWithContents[0].Contents.Direction}");
+                result.Messages.Add($"Can't move {cellWithContents.Contents?.Direction}");
             }
 
             return result;
@@ -88,7 +87,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
         /// <exception cref="ArgumentException"></exception>
         private bool CanMove(Board board, Cell cell)
         {
-            switch (cell.Contents.Direction)
+            switch (cell.Contents?.Direction)
             {
                 case (AbsoluteDirection.North):
                     return (board.Height - 1) > cell.YPosition;

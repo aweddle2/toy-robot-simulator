@@ -32,9 +32,9 @@ namespace AWWA.ToyRobotSimulator.Library.Boards
 			}
 		}
 
-		public IList<Cell> GetCellsWithContents()
+		public Cell? GetCellWithContents()
 		{
-			return _cells.Where(c => c.Contents != null).ToList();
+			return _cells.Where(c => c.Contents != null).FirstOrDefault();
 		}
 
         public bool SetCellContents(int x, int y, ICellContents contents)
@@ -45,7 +45,7 @@ namespace AWWA.ToyRobotSimulator.Library.Boards
                 return false;
             }
 
-            //Clear the contents of the cell
+            //Set the contents of the cell
             Cell cell = _cells.First(c => c.XPosition.Equals(x) && c.YPosition.Equals(y));
             cell.Contents = contents;
             return true;

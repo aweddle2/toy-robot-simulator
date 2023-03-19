@@ -40,23 +40,18 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             }
 
             //Get any existing Robot from the board.  
-            IList<Cell> cellsWithContents = board.GetCellsWithContents();
-
-            ICellContents? cellContents;
+            Cell? cellWithContents = board.GetCellWithContents();
 
             //If there is a robot on the board clear it
-            if (cellsWithContents.Count > 0)
+            if (cellWithContents != null)
             {
-                Cell cell = cellsWithContents[0];
-                cellContents = cell.Contents;
-
                 //Grab the Direction from the robot already on the board if this command has no direction
                 if (_cellContents.Direction == null)
                 {
-                    _cellContents.Direction = cell.Contents?.Direction;
+                    _cellContents.Direction = cellWithContents.Contents?.Direction;
                 }
 
-                bool clearCellResult = board.ClearCellContents(cell.XPosition, cell.YPosition);
+                bool clearCellResult = board.ClearCellContents(cellWithContents.XPosition, cellWithContents.YPosition);
                 if (!clearCellResult)
                 {
                     result.Success = false;
@@ -65,7 +60,7 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             }
             else if (_cellContents.Direction == null)
             {
-                //Can't set the direction so fail
+                //Can't get the direction so fail
                 result.Success = false;
                 result.Messages.Add("Could not set the robots direction.");
 
@@ -110,8 +105,8 @@ namespace AWWA.ToyRobotSimulator.Library.Commands
             if (_cellContents.Direction == null)
             {
                 //Get the robots from the board
-                IList<Cell> cellsWithContents = board.GetCellsWithContents();
-                if (cellsWithContents.Count == 0)
+                Cell? cellWithContents = board.GetCellWithContents();
+                if (cellWithContents == null)
                 {
                     result.Success = false;
                     result.Messages.Add("Command Invalid.  Must specify the direction for the first PLACE command.");

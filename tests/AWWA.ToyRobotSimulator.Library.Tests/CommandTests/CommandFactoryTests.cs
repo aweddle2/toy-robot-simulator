@@ -17,13 +17,13 @@ namespace AWWA.ToyRobotSimulator.Library.Tests.CommandTests
         [InlineData("right", typeof(DirectionCommand))]
         [InlineData("report", typeof(ReportCommand))]
 
-        public void Given_A_Valid_Input_When_That_Command_Is_Parsed_Return_An_ICommand(string command, Type commandType)
+        public void Given_A_Valid_Input_When_That_Command_Is_Parsed_Return_An_ICommand(string command, Type expectedCommandType)
         {
             CommandFactory commandFactory = new CommandFactory();
 
             ICommand result = commandFactory.GetCommand(command);
 
-            Assert.IsType(commandType, result);
+            Assert.IsType(expectedCommandType, result);
         }
 
         [Fact]
